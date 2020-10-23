@@ -32,6 +32,12 @@ class ServerRequestTest extends TestCase
         $this->assertTrue($this->message->withHeader('Content-Type', 'multipart/form-data')->isUrlFormEncoded());
         $this->assertTrue($this->message->withHeader('Content-Type', 'text/plain')->isUrlFormEncoded());
         $this->assertFalse($this->message->withHeader('Content-Type', 'text/html')->isUrlFormEncoded());
+        $this->assertTrue($this->message->withHeader('Content-Type', 'application/json')->isJson());
+        $this->assertTrue($this->message->withHeader('Content-Type', 'application/vnd.microsoft+json')->isJson());
+        $this->assertTrue($this->message->withHeader('Content-Type', 'application/hal+json')->isJson());
+        $this->assertTrue($this->message->withHeader('Content-Type', 'application/vnd.some-provider+json;version=2.0')->isJson());
+        $this->assertTrue($this->message->withHeader('Content-Type', 'application/x-web-app-manifest+json')->isJson());
+        $this->assertFalse($this->message->withHeader('Content-Type', 'application/haljson')->isJson());
     }
 
     public function testParsedBody()

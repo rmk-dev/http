@@ -18,7 +18,7 @@ trait ContentPredicatesTrait
     {
         $contentType = $this->getHeaderLine('Content-Type');
         if ($contentType) {
-            return (bool) preg_match('/application\/(vnd\.[\w\.]+\+)?json/i', $contentType);
+            return (bool) preg_match('/application\/([\w\-\.]+\+)?json/i', $contentType);
         }
 
         return false;
